@@ -4,7 +4,7 @@ const path = require('path');
 //const uuid = require('./helpers/uuid');
 const db = require('./db/db.json');
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -32,5 +32,5 @@ app.get('/api/notes', (req,res) => {
 });
 
 app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT}`)
+  console.log(`App listening at port ${PORT}`)
 );
