@@ -32,9 +32,16 @@ app.get('/api/notes/', (req,res) => {
   }
   else if(req.method === `POST`){
     var id = uuid();
-    db[id] = JSON.parse(req.body);
-    res.status(200).json({message:`Successfully saved note #${id}`});
-    console.info(`Status code 200 - note #${id} successfully saved!`);
+    if(req.body){
+      db[id] = JSON.parse(req.body);
+      res.status(200).json({message:`Successfully saved note #${id}`});
+      console.info(`Status code 200 - note #${id} successfully saved!`);
+    }
+    else{
+      res.status(400).json({message:`No note found in body`});
+      console.info(`Status code 200 - No note was found in the body.`);
+    }
+    
   }
   else{
     res.status(400).json({message:`Error: bad request method`});
