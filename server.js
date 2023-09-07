@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 // Helper method for generating unique ids
-//const uuid = require('./helpers/uuid');
+const uuid = require('./node_modules/uuid');
 const db = require('./db/db.json');
 
 const PORT = process.env.PORT || 3001;
@@ -23,11 +23,10 @@ const reportRequest = function(req){
   console.info(`${req.method} request recieved for endpoint ${req.originalUrl}.`);
 }
 
-// GET request for Notes page
-app.get('/api/notes', (req,res) => {
+// path for requests without params
+app.get('/api/notes/:id', (req,res) => {
   reportRequest(req);
-  res.sendFile(path.join(__dirname, './public/notes.html'));
-  res.status(200).json(db);
+  console.log(req.params.id);
 });
 
 app.listen(PORT, () =>
