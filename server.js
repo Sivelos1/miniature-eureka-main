@@ -24,9 +24,44 @@ const reportRequest = function(req){
 }
 
 // path for requests without params
+app.get('/api/notes/', (req,res) => {
+  reportRequest(req);
+  if(req.method === `GET`){
+    res.send(JSON.parse(db)).status(200);
+    console.info("Status code 200 - response sent!");
+  }
+  else if(req.method === `POST`){
+    var id = uuid();
+    db[id] = JSON.parse(req.body);
+    res.status(200).json({message:`Successfully saved note #${id}`});
+    console.info(`Status code 200 - note #${id} successfully saved!`);
+  }
+  else{
+    res.status(400).json({message:`Error: bad request method`});
+    console.info("Status code 400 - bad request method");
+  }
+  
+});
+// path for requests with params
 app.get('/api/notes/:id', (req,res) => {
   reportRequest(req);
-  console.log(req.params.id);
+  if(req.params.id){
+    if(req.method === `DELETE`){
+      try {
+        delete db[req.params.id];
+        res.status(200).json({message:`Successfully deleted element #${req.params.id}`});
+        console.info(`Status code 200 - note #${id} successfully deleted!`);
+      }
+      catch{
+        res.status(400).json({message:`Could not delete element as it could not be found`});
+        console.info("Status code 400 - Couldn't delete element");
+      }
+    }
+    else{
+      res.status(400).json({message:`Error: bad request method`});
+      console.info("Status code 400 - bad request method");
+    }
+  }
 });
 
 app.listen(PORT, () =>
