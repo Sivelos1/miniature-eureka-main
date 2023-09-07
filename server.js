@@ -13,9 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
-);
+app.get('/', (req, res) => {
+  reportRequest(req);
+  res.sendFile(path.join(__dirname, './public/index.html'));
+  console.log("am i working lol");
+});
 
 //reportRequest: a debug function meant to report any and all requests to the console.
 const reportRequest = function(req){
