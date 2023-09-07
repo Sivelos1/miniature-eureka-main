@@ -27,7 +27,7 @@ const reportRequest = function(req){
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
   res.sendFile(path.join(__dirname, './public/notes.html'));
-  res.status(200);
+  res.status(200).json(db);
 });
 
 app.listen(PORT, () =>
