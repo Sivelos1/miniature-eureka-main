@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 // Helper method for generating unique ids
-const uuid = require('./helpers/uuid');
+//const uuid = require('./helpers/uuid');
 const db = require('./db/db.json');
 
 const PORT = 3001;
@@ -26,7 +26,7 @@ const reportRequest = function(req){
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
   res.sendFile(path.join(__dirname, '/public/notes.html'));
-  res.status(200).json();
+  res.status(200).json({message:"helooooo"});
 });
 
 app.listen(PORT, () =>
