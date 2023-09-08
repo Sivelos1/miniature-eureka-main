@@ -180,7 +180,6 @@ if (window.location.pathname === pathname) {
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
-  console.log("did the things");
 }
 
 getAndRenderNotes();

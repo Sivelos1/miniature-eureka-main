@@ -31,14 +31,16 @@ const reportRequest = function(req){
 // GET route for api/notes
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
-  res.send(db).status(200);
+  res.json(db);
   console.info("Status code 200 - response sent!");
   
 });
 //POST route for api/notes
 app.post('/api/notes', (req,res) => {
   reportRequest(req);
+
   const {title, text} = req.body
+
   if(title && text){
     const newNote = {
       title: title,
