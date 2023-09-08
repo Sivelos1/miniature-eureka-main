@@ -28,53 +28,43 @@ const reportRequest = function(req){
   console.info(`${req.method} request recieved for endpoint ${req.originalUrl}.`);
 }
 
-// path for requests without params
+// GET route for api/notes
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
-  if(req.method === `GET`){
-    res.send(db).status(200);
-    console.info("Status code 200 - response sent!");
-  }
-  else if(req.method === `POST`){
-    var id = uuid();
-    if(req.body){
-      var note = JSON.parse(req.body);
-      note.id = uuid();
-      db.push(note);
-      res.status(200).json({message:`Successfully saved note #${id}`});
-      console.info(`Status code 200 - note #${id} successfully saved!`);
-    }
-    else{
-      res.status(400).json({message:`No note found in body`});
-      console.info(`Status code 200 - No note was found in the body.`);
-    }
-    
-  }
-  else{
-    res.status(400).json({message:`Error: bad request method`});
-    console.info("Status code 400 - bad request method");
-  }
+  res.send(db).status(200);
+  console.info("Status code 200 - response sent!");
   
 });
-// path for requests with params
-app.get('/api/notes/:id', (req,res) => {
+//POST route for api/notes
+app.post('api/notes', (req,res) => {
+  var id = uuid();
+  if(req.body){
+    var note = JSON.parse(req.body);
+    note.id = uuid();
+    db.push(note);
+    res.status(200).json({message:`Successfully saved note #${id}`});
+    console.info(`Status code 200 - note #${id} successfully saved!`);
+  }
+  else{
+    res.status(400).json({message:`No note found in body`});
+    console.info(`Status code 200 - No note was found in the body.`);
+  }
+});
+
+// DELETE route for api/notes
+app.delete('/api/notes/:id', (req,res) => {
   reportRequest(req);
   if(req.params.id){
-    if(req.method === `DELETE`){
-      try {
-        delete db[req.params.id];
+    var note = db.find(n => n.id === req.params.id);
+      if(note){
+        delete note;
         res.status(200).json({message:`Successfully deleted element #${req.params.id}`});
         console.info(`Status code 200 - note #${id} successfully deleted!`);
       }
-      catch{
+      else{
         res.status(400).json({message:`Could not delete element as it could not be found`});
         console.info("Status code 400 - Couldn't delete element");
       }
-    }
-    else{
-      res.status(400).json({message:`Error: bad request method`});
-      console.info("Status code 400 - bad request method");
-    }
   }
 });
 
