@@ -38,13 +38,20 @@ app.get('/api/notes', (req,res) => {
 //POST route for api/notes
 app.post('api/notes', (req,res) => {
   reportRequest(req);
-  var id = uuid();
-  if(req.body){
-    var note = JSON.parse(req.body);
-    note.id = uuid();
-    db.push(note);
-    res.status(200).json({message:`Successfully saved note #${id}`});
-    console.info(`Status code 200 - note #${id} successfully saved!`);
+  const {title, text} = req.body
+  if(title && text){
+    const newNote = {
+      title: title,
+      text: text,
+      id: uuid()
+    }
+    db.push(newNote);
+    const response = {
+      status: 'success',
+      body: newNote,
+    };
+    console.log(response);
+    res.status(201).json(response);
   }
   else{
     res.status(400).json({message:`No note found in body`});
