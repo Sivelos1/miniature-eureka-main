@@ -18,6 +18,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
+app.get('/notes', (req, res) => {
+  reportRequest(req);
+  res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
 //reportRequest: a debug function meant to report any and all requests to the console.
 const reportRequest = function(req){
   console.info(`${req.method} request recieved for endpoint ${req.originalUrl}.`);
@@ -48,7 +53,7 @@ app.post('/api/notes', (req,res) => {
       body: newNote,
     };
     console.log(response);
-    res.status(201).json(response);
+    res.status(201).send(newNote);
   }
   else{
     res.status(400).json({message:`No note found in body`});
