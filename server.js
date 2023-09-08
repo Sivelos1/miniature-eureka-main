@@ -27,7 +27,7 @@ const reportRequest = function(req){
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
   if(req.method === `GET`){
-    res.send(JSON.parse(db)).status(200);
+    res.send(db).status(200);
     console.info("Status code 200 - response sent!");
   }
   else if(req.method === `POST`){
