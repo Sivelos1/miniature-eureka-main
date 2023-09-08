@@ -13,9 +13,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   reportRequest(req);
   res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/notes', (req, res) => {
+  reportRequest(req);
+  res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
 //reportRequest: a debug function meant to report any and all requests to the console.
@@ -33,7 +38,9 @@ app.get('/api/notes', (req,res) => {
   else if(req.method === `POST`){
     var id = uuid();
     if(req.body){
-      db[id] = JSON.parse(req.body);
+      var note = JSON.parse(req.body);
+      note.id = uuid();
+      db.push(note);
       res.status(200).json({message:`Successfully saved note #${id}`});
       console.info(`Status code 200 - note #${id} successfully saved!`);
     }
