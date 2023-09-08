@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 // Helper method for generating unique ids
-const uuid = require('./node_modules/uuid');
+const uuid = require('./node_modules/uuid').v4;
 const db = require('./db/db.json');
 
 const PORT = process.env.PORT || 3001;
