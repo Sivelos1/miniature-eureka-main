@@ -37,6 +37,7 @@ app.get('/api/notes', (req,res) => {
 });
 //POST route for api/notes
 app.post('api/notes', (req,res) => {
+  reportRequest(req);
   var id = uuid();
   if(req.body){
     var note = JSON.parse(req.body);
