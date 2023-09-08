@@ -36,7 +36,7 @@ app.get('/api/notes', (req,res) => {
   
 });
 //POST route for api/notes
-app.post('api/notes', (req,res) => {
+app.post('/api/notes', (req,res) => {
   reportRequest(req);
   const {title, text} = req.body
   if(title && text){
