@@ -24,7 +24,7 @@ const reportRequest = function(req){
 }
 
 // path for requests without params
-app.get('/api/notes/', (req,res) => {
+app.get('/api/notes', (req,res) => {
   reportRequest(req);
   if(req.method === `GET`){
     res.send(JSON.parse(db)).status(200);
