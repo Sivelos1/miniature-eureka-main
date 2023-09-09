@@ -67,7 +67,7 @@ app.delete('/api/notes/:id', (req,res) => {
       if(note){
         console.log('before: '+JSON.stringify(db));
         delete note;
-        db.remove(note);
+        removeItemOnce(db, note);
         console.log('after:'+JSON.stringify(db));
         fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(db));
         res.status(200).json({message:`Successfully deleted element #${req.params.id}`});
@@ -84,6 +84,24 @@ app.listen(PORT, () =>
   console.log(`App listening at port ${PORT}`)
 );
 
-Array.remove = function(element){
-  console.log(this);
+//big thanks to https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array-in-javascript
+
+function removeItemOnce(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
+
+function removeItemAll(arr, value) {
+  var i = 0;
+  while (i < arr.length) {
+    if (arr[i] === value) {
+      arr.splice(i, 1);
+    } else {
+      ++i;
+    }
+  }
+  return arr;
 }
