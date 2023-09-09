@@ -3,7 +3,7 @@ const path = require('path');
 // Helper method for generating unique ids
 const fs = require('fs');
 const uuid = require('./node_modules/uuid').v4;
-const db = require('./db/db.json');
+let db = require('./db/db.json');
 
 const PORT = process.env.PORT || 3001;
 
