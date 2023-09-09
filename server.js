@@ -21,7 +21,6 @@ app.use(express.static('public'));
 
 app.get('/notes', (req, res) => {
   reportRequest(req);
-  console.info("this is the `/notes` get requsest");
   res.sendFile(path.join(__dirname, './public/notes.html'));
 });*/
 
@@ -34,7 +33,7 @@ const reportRequest = function(req){
 // GET route for api/notes
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
-  console.info(`this is the '/api/notes' request`);
+  db = fs.readFileSync(path.join(__dirname, './db/db.json'));
   res.status(200).json(db);
   console.info("Status code 200 - response sent!");
 });
