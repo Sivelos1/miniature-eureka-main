@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 // Helper method for generating unique ids
+const fs = require('fs');
 const uuid = require('./node_modules/uuid').v4;
 const db = require('./db/db.json');
 
@@ -18,10 +19,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-/*app.get('/notes', (req, res) => {
+app.get('/notes', (req, res) => {
   reportRequest(req);
   res.sendFile(path.join(__dirname, './public/notes.html'));
-});*/
+});
 
 //reportRequest: a debug function meant to report any and all requests to the console.
 const reportRequest = function(req){
@@ -31,6 +32,7 @@ const reportRequest = function(req){
 // GET route for api/notes
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
+  console.log(db);
   res.json(db);
   console.info("Status code 200 - response sent!");
   
