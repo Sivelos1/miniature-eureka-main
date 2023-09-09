@@ -67,6 +67,7 @@ app.delete('/api/notes/:id', (req,res) => {
       if(note){
         console.log('before: '+JSON.stringify(db));
         delete note;
+        db.remove(note);
         console.log('after:'+JSON.stringify(db));
         fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(db));
         res.status(200).json({message:`Successfully deleted element #${req.params.id}`});
@@ -82,3 +83,7 @@ app.delete('/api/notes/:id', (req,res) => {
 app.listen(PORT, () =>
   console.log(`App listening at port ${PORT}`)
 );
+
+Array.remove = function(element){
+  console.log(this);
+}
