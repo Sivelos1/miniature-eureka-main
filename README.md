@@ -30,9 +30,9 @@
 
   ## Collaborators
 
-  Special thanks to this StackOverflow user:
+  Special thanks to this StackOverflow user for the removeItemOnce and removeItemAll functions:
 
-  https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array-in-javascript
+  [https://stackoverflow.com/a/5767357](https://stackoverflow.com/a/5767357)
 
   ## Contribution
 
