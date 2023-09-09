@@ -18,10 +18,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-app.get('/notes', (req, res) => {
+/*app.get('/notes', (req, res) => {
   reportRequest(req);
   res.sendFile(path.join(__dirname, './public/notes.html'));
-});
+});*/
 
 //reportRequest: a debug function meant to report any and all requests to the console.
 const reportRequest = function(req){
@@ -48,6 +48,7 @@ app.post('/api/notes', (req,res) => {
       id: uuid()
     }
     db.push(newNote);
+    
     const response = {
       status: 'success',
       body: newNote,
