@@ -26,6 +26,7 @@ app.get('/notes', (req, res) => {
 
 //reportRequest: a debug function meant to report any and all requests to the console.
 const reportRequest = function(req){
+  console.log(db);
   console.info(`${req.method} request recieved for endpoint ${req.originalUrl}.`);
 }
 
