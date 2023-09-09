@@ -65,9 +65,9 @@ app.delete('/api/notes/:id', (req,res) => {
   if(req.params.id){
     var note = db.find(n => n.id === req.params.id);
       if(note){
-        console.log('before: '+db);
+        console.log('before: '+JSON.stringify(db));
         delete note;
-        console.log('after:'+db);
+        console.log('after:'+JSON.stringify(db));
         fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(db));
         res.status(200).json({message:`Successfully deleted element #${req.params.id}`});
         console.info(`Status code 200 - note successfully deleted!`);
