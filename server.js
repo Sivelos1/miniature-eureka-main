@@ -35,7 +35,7 @@ const reportRequest = function(req){
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
   db = fs.readFileSync(path.join(__dirname, './db/db.json'));
-  res.status(200).json(db);
+  res.status(200);
   console.info("Status code 200 - response sent!");
 });
 //POST route for api/notes
