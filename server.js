@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-app.get('*', (req, res) => {
+/*app.get('*', (req, res) => {
   reportRequest(req);
   res.sendFile(path.join(__dirname, './public/index.html'));
 });
@@ -23,7 +23,7 @@ app.get('/notes', (req, res) => {
   reportRequest(req);
   console.info("this is the `/notes` get requsest");
   res.sendFile(path.join(__dirname, './public/notes.html'));
-});
+});*/
 
 //reportRequest: a debug function meant to report any and all requests to the console.
 const reportRequest = function(req){
