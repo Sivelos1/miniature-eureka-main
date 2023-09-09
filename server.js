@@ -33,6 +33,7 @@ const reportRequest = function(req){
 // GET route for api/notes
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
+  db = fs.readFileSync(path.join(__dirname, './db/db.json'));
   res.json(db);
   console.info("Status code 200 - response sent!");
   
@@ -50,12 +51,7 @@ app.post('/api/notes', (req,res) => {
       id: uuid()
     }
     db.push(newNote);
-    
-    const response = {
-      status: 'success',
-      body: newNote,
-    };
-    console.log(response);
+    fs.writeFileSync(path.join(__dirname, './db/db.json'), JSON.stringify(db));
     res.status(201).send(newNote);
   }
   else{
