@@ -26,7 +26,6 @@ app.get('/notes', (req, res) => {
 
 //reportRequest: a debug function meant to report any and all requests to the console.
 const reportRequest = function(req){
-  console.log(db);
   console.info(`${req.method} request recieved for endpoint ${req.originalUrl}.`);
 }
 
@@ -84,5 +83,3 @@ app.delete('/api/notes/:id', (req,res) => {
 app.listen(PORT, () =>
   console.log(`App listening at port ${PORT}`)
 );
-
-console.log(db);
