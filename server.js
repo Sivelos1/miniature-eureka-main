@@ -32,7 +32,6 @@ const reportRequest = function(req){
 // GET route for api/notes
 app.get('/api/notes', (req,res) => {
   reportRequest(req);
-  console.log(db);
   res.json(db);
   console.info("Status code 200 - response sent!");
   
@@ -84,3 +83,5 @@ app.delete('/api/notes/:id', (req,res) => {
 app.listen(PORT, () =>
   console.log(`App listening at port ${PORT}`)
 );
+
+console.log(db);
